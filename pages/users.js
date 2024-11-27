@@ -81,8 +81,8 @@ export function initUsers(container) {
             const users = await api.getUsers();
             table.innerHTML = users.map(user => `
                 <tr>
-                    <td>${user.usucodigo}</td>
-                    <td>${user.usunome}</td>
+                    <td>${user.id}</td>
+                    <td>${user.nome}</td>
                     <td>${user.usulogin}</td>
                     <td>${user.usuativo ? 'Yes' : 'No'}</td>
                     <td>

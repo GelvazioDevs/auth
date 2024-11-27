@@ -4,7 +4,7 @@ export function initSystems(container) {
     const template = `
         <div class="systems-page">
             <h1>Systems Management</h1>
-            <button class="add-button" id="openModal">+ Add New System</button>
+            <button class="add-button" id="openModal">Add New System</button>
             <table id="systemsTable">
                 <thead>
                     <tr>
@@ -70,13 +70,24 @@ export function initSystems(container) {
     async function loadSystems() {
         try {
             const systems = await api.getSystems();
-            table.innerHTML = systems.map(system => `
+            table.innerHTML = `
+                <style>
+                    .coluna1 {
+                        display:flex;
+                        justify-content-center;
+                        width:100%;
+                        align-itens:center;
+                        background-color:red;
+                    }
+                </style>
+            `;
+            table.innerHTML += systems.map(system => `
                 <tr>
-                    <td>${system.siscodigo}</td>
+                    <td class="coluna">${system.id}</td>
                     <td>${system.sisnome}</td>
                     <td>${system.sisativo ? 'Yes' : 'No'}</td>
                     <td>
-                        <button onclick="deleteSystem(${system.siscodigo})">Delete</button>
+                        <button onclick="deleteSystem(${system.id})">Delete</button>
                     </td>
                 </tr>
             `).join('');

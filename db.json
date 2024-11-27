@@ -50,5 +50,18 @@
       "id": 4
     }
   ],
-  "profiles": []
+  "profiles": [
+    {
+      "codigo": 1,
+      "nome": "Admin",
+      "siscodigo": null,
+      "permissions": {
+        "index": true,
+        "update": true,
+        "insert": true,
+        "delete": true
+      },
+      "id": 1
+    }
+  ]
 }
