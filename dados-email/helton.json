@@ -1,0 +1,41 @@
+{
+	"id": "9a77f412-4eb0-4f94-a81a-9d248fc4692d",
+	"aud": "authenticated",
+	"role": "authenticated",
+	"email": "heltonpedroso93@gmail.com",
+	"phone": "",
+	"confirmation_sent_at": "2024-11-27T22:45:17.831451035Z",
+	"app_metadata": {
+		"provider": "email",
+		"providers": [
+			"email"
+		]
+	},
+	"user_metadata": {
+		"email": "heltonpedroso93@gmail.com",
+		"email_verified": false,
+		"phone_verified": false,
+		"sub": "9a77f412-4eb0-4f94-a81a-9d248fc4692d"
+	},
+	"identities": [
+		{
+			"identity_id": "eba0ea0a-2d70-4e0b-ba6f-a4549c2baf52",
+			"id": "9a77f412-4eb0-4f94-a81a-9d248fc4692d",
+			"user_id": "9a77f412-4eb0-4f94-a81a-9d248fc4692d",
+			"identity_data": {
+				"email": "heltonpedroso93@gmail.com",
+				"email_verified": false,
+				"phone_verified": false,
+				"sub": "9a77f412-4eb0-4f94-a81a-9d248fc4692d"
+			},
+			"provider": "email",
+			"last_sign_in_at": "2024-11-27T22:45:17.828701244Z",
+			"created_at": "2024-11-27T22:45:17.828747Z",
+			"updated_at": "2024-11-27T22:45:17.828747Z",
+			"email": "heltonpedroso93@gmail.com"
+		}
+	],
+	"created_at": "2024-11-27T22:45:17.826232Z",
+	"updated_at": "2024-11-27T22:45:19.853723Z",
+	"is_anonymous": false
+}
