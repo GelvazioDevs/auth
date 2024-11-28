@@ -2,9 +2,13 @@ import axios from "axios";
 
 const HTTP_STATUS_CODE_OK = 200;
 const HTTP_STATUS_CODE_CREATED = 201;
-const API_URL = "http://localhost:3001";
-const API_URL_SUPABASE = "https://wbgctstptayrxskwaqld.supabase.co";
-const API_KEY_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndiZ2N0c3RwdGF5cnhza3dhcWxkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjg5NTM5NzgsImV4cCI6MjA0NDUyOTk3OH0.6qOP2ANbwnxHosWnupL8Wbdhl7AtpZNAOrcBZ91Hzzk";
+
+const API_URL_SUPABASE = import.meta.env.VITE_SUPABASE_URL;
+const API_KEY_TOKEN = import.meta.env.VITE_SUPABASE_ANON_KEY;
+
+// const API_URL_SUPABASE = "https://wbgctstptayrxskwaqld.supabase.co";
+// const API_KEY_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndiZ2N0c3RwdGF5cnhza3dhcWxkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjg5NTM5NzgsImV4cCI6MjA0NDUyOTk3OH0.6qOP2ANbwnxHosWnupL8Wbdhl7AtpZNAOrcBZ91Hzzk";
+
 const AUTHORIZATION_AUTH = localStorage.getItem("access_token");
 
 export const api = {
