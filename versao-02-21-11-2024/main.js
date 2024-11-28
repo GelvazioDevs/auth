@@ -61,7 +61,6 @@ document.querySelectorAll('nav a').forEach(link => {
 document.getElementById('logout')?.addEventListener('click', (e) => {
     e.preventDefault();
     localStorage.removeItem('currentUser');
-    localStorage.removeItem('access_token');
     initApp();
 });
 

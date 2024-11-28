@@ -4,7 +4,7 @@ export function initProfiles(container) {
     const template = `
         <div class="profiles-page">
             <h1>Profile Management</h1>
-            <button class="add-button" id="openModal">+ Add New Profile</button>
+            <button class="add-button" id="openModal">Add New Profile</button>
             <table id="profilesTable">
                 <thead>
                     <tr>
@@ -27,10 +27,6 @@ export function initProfiles(container) {
                     <button class="close-modal" id="closeModal">&times;</button>
                 </div>
                 <form id="profileForm">
-                    <div class="form-group">
-                        <label for="codigo">Profile Code</label>
-                        <input type="number" id="codigo" required>
-                    </div>
                     <div class="form-group">
                         <label for="nome">Profile Name</label>
                         <input type="text" id="nome" required>
@@ -83,7 +79,7 @@ export function initProfiles(container) {
             systemSelect.innerHTML = systems
                 .filter(system => system.sisativo)
                 .map(system => `
-                    <option value="${system.siscodigo}">${system.sisnome}</option>
+                    <option value="${system.id}">${system.sisnome}</option>
                 `).join('');
         } catch (error) {
             console.error('Error loading systems:', error);
@@ -109,10 +105,10 @@ export function initProfiles(container) {
             ]);
 
             table.innerHTML = profiles.map(profile => {
-                const system = systems.find(s => s.siscodigo === profile.siscodigo);
+                const system = systems.find(s => s.id === profile.siscodigo);
                 return `
                     <tr>
-                        <td>${profile.codigo}</td>
+                        <td>${profile.id}</td>
                         <td>${profile.nome}</td>
                         <td>${system ? system.sisnome : 'Unknown'}</td>
                         <td>
@@ -159,7 +155,6 @@ export function initProfiles(container) {
         e.preventDefault();
         
         const newProfile = {
-            codigo: parseInt(document.getElementById('codigo').value),
             nome: document.getElementById('nome').value,
             siscodigo: parseInt(document.getElementById('siscodigo').value),
             permissions: {
@@ -173,8 +168,8 @@ export function initProfiles(container) {
         try {
             // Check if profile code already exists
             const profiles = await api.getProfiles();
-            if (profiles.some(p => p.codigo === newProfile.codigo)) {
-                alert('Profile code already exists. Please use a different code.');
+            if (profiles.some(p => p.nome === newProfile.nome)) {
+                alert('Profile name already exists. Please use a different name.');
                 return;
             }
 
