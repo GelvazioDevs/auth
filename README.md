@@ -1,3 +1,9 @@
+#E-mail auth
+* SENDER NAME:saisrv
+* sender:team@saisrv.tech
+* User: resend
+* Senha : FQ@xLh~?4a7ppuL
+
 # Authentication System
 
 A complete authentication and management system built with HTML, CSS, and Vanilla JavaScript. This system provides user authentication, system management, user management, and profile management with role-based permissions.
