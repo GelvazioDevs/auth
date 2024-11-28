@@ -1,4 +1,4 @@
-import { api } from '../utils/api.js';
+import {api} from "../utils/api.js";
 
 export function initLogin(container) {
     const template = `
@@ -62,35 +62,35 @@ export function initLogin(container) {
 
     container.innerHTML = template;
 
-    const loginForm = document.getElementById('loginForm');
-    const errorMessage = document.getElementById('error-message');
-    const modal = document.getElementById('userModal');
-    const createUserBtn = document.getElementById('createUserBtn');
-    const closeModalBtn = document.getElementById('closeModal');
-    const cancelBtn = document.getElementById('cancelButton');
-    const userForm = document.getElementById('userForm');
+    const loginForm = document.getElementById("loginForm");
+    const errorMessage = document.getElementById("error-message");
+    const modal = document.getElementById("userModal");
+    const createUserBtn = document.getElementById("createUserBtn");
+    const closeModalBtn = document.getElementById("closeModal");
+    const cancelBtn = document.getElementById("cancelButton");
+    const userForm = document.getElementById("userForm");
 
     function openModal() {
-        modal.classList.add('active');
+        modal.classList.add("active");
     }
 
     function closeModal() {
-        modal.classList.remove('active');
+        modal.classList.remove("active");
         userForm.reset();
     }
 
-    loginForm.addEventListener('submit', async (e) => {
+    loginForm.addEventListener("submit", async (e) => {
         e.preventDefault();
-        const login = document.getElementById('login').value;
-        const password = document.getElementById('password').value;
+        const login = document.getElementById("login").value;
+        const password = document.getElementById("password").value;
 
         try {
             const user = await api.login(login, password);
             if (user) {
-                localStorage.setItem('currentUser', JSON.stringify(user));
+                localStorage.setItem("currentUser", JSON.stringify(user));
                 window.location.reload();
             } else {
-                errorMessage.textContent = 'Invalid username or password';
+                errorMessage.textContent = "Invalid username or password";
             }
         } catch (error) {
             alert("Usuario ou senha invalido!");
@@ -99,47 +99,47 @@ export function initLogin(container) {
         }
     });
 
-    createUserBtn.addEventListener('click', openModal);
-    closeModalBtn.addEventListener('click', closeModal);
-    cancelBtn.addEventListener('click', closeModal);
+    createUserBtn.addEventListener("click", openModal);
+    closeModalBtn.addEventListener("click", closeModal);
+    cancelBtn.addEventListener("click", closeModal);
 
-    modal.addEventListener('click', (e) => {
+    modal.addEventListener("click", (e) => {
         if (e.target === modal) {
             closeModal();
         }
     });
 
-    userForm.addEventListener('submit', async (e) => {
+    userForm.addEventListener("submit", async (e) => {
         e.preventDefault();
 
         const newUser = {
-            usucodigo: parseInt(document.getElementById('usucodigo').value),
-            usunome: document.getElementById('usunome').value,
-            usulogin: document.getElementById('usulogin').value,
-            ususenha: document.getElementById('ususenha').value,
-            usuativo: document.getElementById('usuativo').checked
+            usucodigo: parseInt(document.getElementById("usucodigo").value),
+            usunome: document.getElementById("usunome").value,
+            usulogin: document.getElementById("usulogin").value,
+            ususenha: document.getElementById("ususenha").value,
+            usuativo: document.getElementById("usuativo").checked
         };
 
         try {
             // Check if user code already exists
             const users = await api.getUsers();
             if (users.some(u => u.usucodigo === newUser.usucodigo)) {
-                alert('User code already exists. Please use a different code.');
+                alert("User code already exists. Please use a different code.");
                 return;
             }
 
             // Check if login already exists
             if (users.some(u => u.usulogin === newUser.usulogin)) {
-                alert('Login already exists. Please choose a different login.');
+                alert("Login already exists. Please choose a different login.");
                 return;
             }
 
             await api.createUser(newUser);
             closeModal();
-            alert('User created successfully! You can now login.');
+            alert("User created successfully! You can now login.");
         } catch (error) {
-            alert('An error occurred while creating the user. Please try again.');
-            console.error('Create user error:', error);
+            alert("An error occurred while creating the user. Please try again.");
+            console.error("Create user error:", error);
         }
     });
 }

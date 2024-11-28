@@ -1,4 +1,4 @@
-import { api } from '../utils/api.js';
+import {api} from "../utils/api.js";
 
 export function initSystems(container) {
     const template = `
@@ -47,19 +47,19 @@ export function initSystems(container) {
 
     container.innerHTML = template;
 
-    const modal = document.getElementById('systemModal');
-    const openModalBtn = document.getElementById('openModal');
-    const closeModalBtn = document.getElementById('closeModal');
-    const cancelBtn = document.getElementById('cancelButton');
-    const form = document.getElementById('systemForm');
-    const table = document.getElementById('systemsTable').querySelector('tbody');
+    const modal = document.getElementById("systemModal");
+    const openModalBtn = document.getElementById("openModal");
+    const closeModalBtn = document.getElementById("closeModal");
+    const cancelBtn = document.getElementById("cancelButton");
+    const form = document.getElementById("systemForm");
+    const table = document.getElementById("systemsTable").querySelector("tbody");
 
     function openModal() {
-        modal.classList.add('active');
+        modal.classList.add("active");
     }
 
     function closeModal() {
-        modal.classList.remove('active');
+        modal.classList.remove("active");
         form.reset();
     }
 
@@ -81,54 +81,54 @@ export function initSystems(container) {
                 <tr>
                     <td class="coluna">${system.id}</td>
                     <td>${system.sisnome}</td>
-                    <td>${system.sisativo ? 'Yes' : 'No'}</td>
+                    <td>${system.sisativo ? "Yes" : "No"}</td>
                     <td>
                         <button onclick="deleteSystem(${system.id})">Delete</button>
                     </td>
                 </tr>
-            `).join('');
+            `).join("");
         } catch (error) {
-            console.error('Error loading systems:', error);
-            alert('Error loading systems. Please try again.');
+            console.error("Error loading systems:", error);
+            alert("Error loading systems. Please try again.");
         }
     }
 
-    window.deleteSystem = async function(code) {
-        if (confirm('Are you sure you want to delete this system?')) {
+    window.deleteSystem = async function (code) {
+        if (confirm("Are you sure you want to delete this system?")) {
             try {
                 await api.deleteSystem(code);
                 loadSystems();
             } catch (error) {
-                console.error('Error deleting system:', error);
-                alert('Error deleting system. Please try again.');
+                console.error("Error deleting system:", error);
+                alert("Error deleting system. Please try again.");
             }
         }
     };
 
-    openModalBtn.addEventListener('click', openModal);
-    closeModalBtn.addEventListener('click', closeModal);
-    cancelBtn.addEventListener('click', closeModal);
+    openModalBtn.addEventListener("click", openModal);
+    closeModalBtn.addEventListener("click", closeModal);
+    cancelBtn.addEventListener("click", closeModal);
 
-    modal.addEventListener('click', (e) => {
+    modal.addEventListener("click", (e) => {
         if (e.target === modal) {
             closeModal();
         }
     });
 
-    form.addEventListener('submit', async (e) => {
+    form.addEventListener("submit", async (e) => {
         e.preventDefault();
-        
+
         const newSystem = {
-            siscodigo: parseInt(document.getElementById('siscodigo').value),
-            sisnome: document.getElementById('sisnome').value,
-            sisativo: document.getElementById('sisativo').checked
+            siscodigo: parseInt(document.getElementById("siscodigo").value),
+            sisnome: document.getElementById("sisnome").value,
+            sisativo: document.getElementById("sisativo").checked
         };
 
         try {
             // Check if system code already exists
             const systems = await api.getSystems();
             if (systems.some(s => s.sisnome === newSystem.sisnome)) {
-                alert('System name already exists. Please use a different name.');
+                alert("System name already exists. Please use a different name.");
                 return;
             }
 
@@ -136,8 +136,8 @@ export function initSystems(container) {
             closeModal();
             loadSystems();
         } catch (error) {
-            console.error('Error creating system:', error);
-            alert('Error creating system. Please try again.');
+            console.error("Error creating system:", error);
+            alert("Error creating system. Please try again.");
         }
     });
 

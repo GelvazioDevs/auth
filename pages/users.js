@@ -1,4 +1,4 @@
-import { api } from '../utils/api.js';
+import {api} from "../utils/api.js";
 
 export function initUsers(container) {
     const template = `
@@ -60,19 +60,19 @@ export function initUsers(container) {
 
     container.innerHTML = template;
 
-    const modal = document.getElementById('userModal');
-    const openModalBtn = document.getElementById('openModal');
-    const closeModalBtn = document.getElementById('closeModal');
-    const cancelBtn = document.getElementById('cancelButton');
-    const form = document.getElementById('userForm');
-    const table = document.getElementById('usersTable').querySelector('tbody');
+    const modal = document.getElementById("userModal");
+    const openModalBtn = document.getElementById("openModal");
+    const closeModalBtn = document.getElementById("closeModal");
+    const cancelBtn = document.getElementById("cancelButton");
+    const form = document.getElementById("userForm");
+    const table = document.getElementById("usersTable").querySelector("tbody");
 
     function openModal() {
-        modal.classList.add('active');
+        modal.classList.add("active");
     }
 
     function closeModal() {
-        modal.classList.remove('active');
+        modal.classList.remove("active");
         form.reset();
     }
 
@@ -84,47 +84,47 @@ export function initUsers(container) {
                     <td>${user.id}</td>
                     <td>${user.nome}</td>
                     <td>${user.email}</td>
-                    <td>${user.senha ? 'Yes' : 'No'}</td>
+                    <td>${user.senha ? "Yes" : "No"}</td>
                     <td>
                         <button onclick="deleteUser(${user.id})">Delete</button>
                     </td>
                 </tr>
-            `).join('');
+            `).join("");
         } catch (error) {
-            console.error('Error loading users:', error);
-            alert('Error loading users. Please try again.');
+            console.error("Error loading users:", error);
+            alert("Error loading users. Please try again.");
         }
     }
 
-    window.deleteUser = async function(code) {
-        if (confirm('Are you sure you want to delete this user?')) {
+    window.deleteUser = async function (code) {
+        if (confirm("Are you sure you want to delete this user?")) {
             try {
                 await api.deleteUser(code);
                 loadUsers();
             } catch (error) {
-                console.error('Error deleting user:', error);
-                alert('Error deleting user. Please try again.');
+                console.error("Error deleting user:", error);
+                alert("Error deleting user. Please try again.");
             }
         }
     };
 
-    openModalBtn.addEventListener('click', openModal);
-    closeModalBtn.addEventListener('click', closeModal);
-    cancelBtn.addEventListener('click', closeModal);
+    openModalBtn.addEventListener("click", openModal);
+    closeModalBtn.addEventListener("click", closeModal);
+    cancelBtn.addEventListener("click", closeModal);
 
-    modal.addEventListener('click', (e) => {
+    modal.addEventListener("click", (e) => {
         if (e.target === modal) {
             closeModal();
         }
     });
 
-    form.addEventListener('submit', async (e) => {
+    form.addEventListener("submit", async (e) => {
         e.preventDefault();
-        
+
         const newUser = {
-            usunome: document.getElementById('usunome').value,
-            email: document.getElementById('email').value,
-            ususenha: document.getElementById('ususenha').value,
+            usunome: document.getElementById("usunome").value,
+            email: document.getElementById("email").value,
+            ususenha: document.getElementById("ususenha").value,
             // usuativo: document.getElementById('usuativo').checked
         };
 
@@ -133,7 +133,7 @@ export function initUsers(container) {
             const users = await api.getUsers();
             // Check if login already exists
             if (users.some(u => u.email === newUser.email)) {
-                alert('Login already exists. Please choose a different login.');
+                alert("Login already exists. Please choose a different login.");
                 return;
             }
 
@@ -141,8 +141,8 @@ export function initUsers(container) {
             closeModal();
             loadUsers();
         } catch (error) {
-            console.error('Error creating user:', error);
-            alert('Error creating user. Please try again.');
+            console.error("Error creating user:", error);
+            alert("Error creating user. Please try again.");
         }
     });
 
