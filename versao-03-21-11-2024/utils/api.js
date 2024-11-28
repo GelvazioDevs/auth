@@ -4,7 +4,7 @@ export const api = {
   // Systems
   async getSystems() {
     const { data, error } = await supabase
-      .from('sistema')
+      .from('systems')
       .select('*');
     
     if (error) throw error;
@@ -13,7 +13,7 @@ export const api = {
 
   async createSystem(system) {
     const { data, error } = await supabase
-      .from('sistema')
+      .from('systems')
       .insert([system])
       .select()
       .single();
@@ -24,7 +24,7 @@ export const api = {
 
   async deleteSystem(id) {
     const { error } = await supabase
-      .from('sistema')
+      .from('systems')
       .delete()
       .eq('siscodigo', id);
     
@@ -34,7 +34,7 @@ export const api = {
   // Users
   async getUsers() {
     const { data, error } = await supabase
-      .from('usuario')
+      .from('users')
       .select('*');
     
     if (error) throw error;
@@ -43,7 +43,7 @@ export const api = {
 
   async createUser(user) {
     const { data, error } = await supabase
-      .from('usuario')
+      .from('users')
       .insert([user])
       .select()
       .single();
@@ -54,7 +54,7 @@ export const api = {
 
   async deleteUser(id) {
     const { error } = await supabase
-      .from('usuario')
+      .from('users')
       .delete()
       .eq('usucodigo', id);
     
@@ -63,7 +63,7 @@ export const api = {
 
   async login(username, password) {
     const { data, error } = await supabase
-      .from('usuario')
+      .from('users')
       .select('*')
       .eq('usulogin', username)
       .eq('ususenha', password)
@@ -74,20 +74,20 @@ export const api = {
     return data;
   },
 
-  // Profiles
-  async getProfiles() {
+  // Permissions
+  async getPermissions() {
     const { data, error } = await supabase
-      .from('profiles')
+      .from('permissions')
       .select('*');
     
     if (error) throw error;
     return data;
   },
 
-  async createProfile(profile) {
+  async createPermission(permission) {
     const { data, error } = await supabase
-      .from('profiles')
-      .insert([profile])
+      .from('permissions')
+      .insert([permission])
       .select()
       .single();
     
@@ -95,11 +95,11 @@ export const api = {
     return data;
   },
 
-  async deleteProfile(id) {
+  async deletePermission(id) {
     const { error } = await supabase
-      .from('profiles')
+      .from('permissions')
       .delete()
-      .eq('codigo', id);
+      .eq('id', id);
     
     if (error) throw error;
   }
