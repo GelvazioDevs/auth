@@ -27,10 +27,6 @@ export function initSystems(container) {
                 </div>
                 <form id="systemForm">
                     <div class="form-group">
-                        <label for="siscodigo">System Code</label>
-                        <input type="number" id="siscodigo" required>
-                    </div>
-                    <div class="form-group">
                         <label for="sisnome">System Name</label>
                         <input type="text" id="sisnome" required>
                     </div>
@@ -131,8 +127,8 @@ export function initSystems(container) {
         try {
             // Check if system code already exists
             const systems = await api.getSystems();
-            if (systems.some(s => s.siscodigo === newSystem.siscodigo)) {
-                alert('System code already exists. Please use a different code.');
+            if (systems.some(s => s.sisnome === newSystem.sisnome)) {
+                alert('System name already exists. Please use a different name.');
                 return;
             }
 

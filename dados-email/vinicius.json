@@ -1,0 +1,41 @@
+{
+	"id": "d7efe1e7-c09f-422d-b77a-4659210048ee",
+	"aud": "authenticated",
+	"role": "authenticated",
+	"email": "viniciuskbaumann@gmail.com",
+	"phone": "",
+	"confirmation_sent_at": "2024-11-27T22:46:50.293863627Z",
+	"app_metadata": {
+		"provider": "email",
+		"providers": [
+			"email"
+		]
+	},
+	"user_metadata": {
+		"email": "viniciuskbaumann@gmail.com",
+		"email_verified": false,
+		"phone_verified": false,
+		"sub": "d7efe1e7-c09f-422d-b77a-4659210048ee"
+	},
+	"identities": [
+		{
+			"identity_id": "eb8e3f8d-b43c-4cbb-b9ee-35f00a5193fd",
+			"id": "d7efe1e7-c09f-422d-b77a-4659210048ee",
+			"user_id": "d7efe1e7-c09f-422d-b77a-4659210048ee",
+			"identity_data": {
+				"email": "viniciuskbaumann@gmail.com",
+				"email_verified": false,
+				"phone_verified": false,
+				"sub": "d7efe1e7-c09f-422d-b77a-4659210048ee"
+			},
+			"provider": "email",
+			"last_sign_in_at": "2024-11-27T22:46:50.288597772Z",
+			"created_at": "2024-11-27T22:46:50.288664Z",
+			"updated_at": "2024-11-27T22:46:50.288664Z",
+			"email": "viniciuskbaumann@gmail.com"
+		}
+	],
+	"created_at": "2024-11-27T22:46:50.282397Z",
+	"updated_at": "2024-11-27T22:46:52.344786Z",
+	"is_anonymous": false
+}

@@ -1,0 +1,10 @@
+{
+    "nome": "Admin",
+      "siscodigo": 1,
+      "permissions": {
+          "index": true,
+          "update": true,
+          "insert": true,
+          "delete": true
+      }
+  }

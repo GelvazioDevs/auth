@@ -1,6 +1,6 @@
 import { initSystems } from './pages/systems.js';
 import { initUsers } from './pages/users.js';
-import { initProfiles } from './pages/profiles.js';
+import { initPermissions } from './pages/permissions.js';
 import { initLogin } from './pages/login.js';
 import { checkAuth } from './utils/auth.js';
 
@@ -11,15 +11,15 @@ if (!localStorage.getItem('systems')) {
 if (!localStorage.getItem('users')) {
     localStorage.setItem('users', JSON.stringify([]));
 }
-if (!localStorage.getItem('profiles')) {
-    localStorage.setItem('profiles', JSON.stringify([]));
+if (!localStorage.getItem('permissions')) {
+    localStorage.setItem('permissions', JSON.stringify([]));
 }
 
 // Router
 const pages = {
     systems: initSystems,
     users: initUsers,
-    profiles: initProfiles
+    permissions: initPermissions
 };
 
 let currentPage = 'systems';
@@ -61,7 +61,6 @@ document.querySelectorAll('nav a').forEach(link => {
 document.getElementById('logout')?.addEventListener('click', (e) => {
     e.preventDefault();
     localStorage.removeItem('currentUser');
-    localStorage.removeItem('access_token');
     initApp();
 });
 

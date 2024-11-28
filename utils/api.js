@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const HTTP_STATUS_CODE_OK = 200;
+const HTTP_STATUS_CODE_CREATED = 201;
 const API_URL = "http://localhost:3001";
 const API_URL_SUPABASE = "https://wbgctstptayrxskwaqld.supabase.co";
 const API_KEY_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndiZ2N0c3RwdGF5cnhza3dhcWxkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjg5NTM5NzgsImV4cCI6MjA0NDUyOTk3OH0.6qOP2ANbwnxHosWnupL8Wbdhl7AtpZNAOrcBZ91Hzzk";
@@ -58,12 +59,36 @@ export const api = {
     },
     // Users
     async getUsers() {
-        const response = await axios.get(`${API_URL}/users`);
+        const route = 'rest/v1/usuario?select=*';
+        const response = await axios.get(`${API_URL_SUPABASE}/${route}`, {
+            headers: this.getHeaders()
+        });
+        
+        console.log("Dados da api:" + JSON.stringify(response.data));
+
         return response.data;
     },
     async createUser(user) {
-        const response = await axios.post(`${API_URL}/users`, user);
-        return response.data;
+        const data = {
+            nome: user.usunome,
+		    email: user.email,
+		    senha:user.ususenha
+        }
+    
+        const route = 'rest/v1/usuario';
+        const response = await axios.post(`${API_URL_SUPABASE}/${route}`, data, {
+            headers: this.getHeaders()
+        });
+
+        console.log("Response: " + JSON.stringify(response.data));
+
+        if(response.status == HTTP_STATUS_CODE_CREATED){
+            return true;
+        }
+
+        alert("Dados invalidos!");
+
+        return false;
     },
     async deleteUser(id) {
         const route = `rest/v1/usuario?id=eq.${id}`;
@@ -84,12 +109,11 @@ export const api = {
                 "apikey": API_KEY_TOKEN
             }
         });
-
-        const access_token = response.data.access_token;
-
-        localStorage.setItem("access_token", access_token);
-
+        
         if(response.status == HTTP_STATUS_CODE_OK){
+            const access_token = response.data.access_token;
+            localStorage.setItem("access_token", access_token);
+
             return true;
         }
 
@@ -99,14 +123,33 @@ export const api = {
     },
     // Profiles
     async getProfiles() {
-        const response = await axios.get(`${API_URL}/profiles`);
+        const route = 'rest/v1/profiles?select=*';
+        const response = await axios.get(`${API_URL_SUPABASE}/${route}`, {
+            headers: this.getHeaders()
+        });
+        
         return response.data;
     },
     async createProfile(profile) {
-        const response = await axios.post(`${API_URL}/profiles`, profile);
-        return response.data;
+        const data = profile;
+        
+        const route = 'rest/v1/profiles';
+        const response = await axios.post(`${API_URL_SUPABASE}/${route}`, data, {
+            headers: this.getHeaders()
+        });
+
+        console.log("Response: " + JSON.stringify(response.data));
+
+        if(response.status == HTTP_STATUS_CODE_CREATED){
+            return true;
+        }
+
+        alert("Dados invalidos!");
+
+        return false;
     },
     async deleteProfile(id) {
-        await axios.delete(`${API_URL}/profiles/${id}`);
+        const route = `rest/v1/profiles?id=eq.${id}`;
+        await axios.delete(`${API_URL_SUPABASE}/${route}`, {headers: this.getHeaders()});
     }
 };
